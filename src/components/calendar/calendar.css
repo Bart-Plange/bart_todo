@@ -1,0 +1,18 @@
+/* CustomCalendar.css */
+.custom-calendar {
+    font-size: 16px;
+}
+
+.custom-calendar .react-calendar__tile--active {
+    background-color: blue;
+    color: white;
+}
+
+.custom-calendar .react-calendar__month-view__weekdays {
+    background-color: red;
+    color: white;
+}
+
+.custom-calendar .react-calendar__tile--active:disabled {
+    background-color: lightgray;
+}
