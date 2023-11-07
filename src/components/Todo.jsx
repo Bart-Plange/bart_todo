@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import ColorPalette from './ColorPalette';
 import Category from './Category';
-
 function ToDo() {
   const [categories, setCategories] = useState(['work', 'school', 'offices']);
   const handleCreateCategory = (categoryName) => {
@@ -16,15 +15,17 @@ function ToDo() {
     setCategories(updatedCategories);
   };
 
+
   const [tasks, setTasks] = useState([
     {
       id: 1,
       text: 'Task 1',
       completed: false,
-      date: '2023-10-16',
-      time: '10:00 AM',
-      details: 'Task details go here.',
-      category: 'work',
+      date: '2023-10-17',
+      time: '2:30 PM',
+      details: 'Another task with details.',
+      category: 'school',
+      priority: 'medium',
     },
     {
       id: 2,
@@ -34,15 +35,17 @@ function ToDo() {
       time: '2:30 PM',
       details: 'Another task with details.',
       category: 'school',
+      priority: 'high',
     },
     {
       id: 3,
       text: 'Task 3',
-      completed: true,
-      date: '2023-10-18',
-      time: '4:45 PM',
-      details: 'This is a completed task with extra details.',
-      category: 'work',
+      completed: false,
+      date: '2023-10-17',
+      time: '2:30 PM',
+      details: 'Another task with details.',
+      category: 'school',
+      priority: 'low',
     },
   ]);
 
@@ -171,11 +174,20 @@ function ToDo() {
     );
   };
 
+  const setReminderTime = (taskId, date, time) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId ? { ...task, date, time } : task
+      )
+    );
+  };
+
   const formatTime = (time) => {
     // You can format the time here as needed, e.g., AM/PM to 24-hour format
     return time;
   };
 
+  // scheduke reminders
   const scheduleReminder = (task) => {
   if (task.reminderEnabled) {
     const reminderTime = new Date(`${task.date}T${task.time}`);
@@ -227,6 +239,8 @@ function ToDo() {
   }
 };
 
+
+
   // Schedule reminders for existing tasks
 useEffect(() => {
   tasks.forEach((task) => {
@@ -268,7 +282,8 @@ useEffect(() => {
               style={{ backgroundColor: task.color }}
             >
               <span className={task.completed ? 'line-through' : ''}>{task.text}</span>
-              <div className='flex gap-4 pt-1'>
+              <div className='pt-2'>
+                <div className='flex gap-8 pb-1'>
                 <button className="text-green-600 bg-green-300 rounded-full" title="Complete" onClick={() => completeTask(task.id)}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -291,16 +306,21 @@ useEffect(() => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
+                </div>
 
                 {/* reminders */}
-                <label>
-                  Set Reminder:
-                  <input
-                    type="checkbox"
-                    checked={task.reminderEnabled}
-                    onChange={() => toggleReminder(task.id)}
-                  />
-                </label>
+            <label className="flex items-center">
+            <span className="p-2 bg-blue-200 rounded-md mr-2">Reminder:</span>
+            <input
+              type="checkbox"
+              checked={task.reminderEnabled}
+              onChange={() => toggleReminder(task.id)}
+              className="transform scale-150 bg-green-200"
+            />
+          </label>
+
+
+
               </div>
             </li>
           ))}

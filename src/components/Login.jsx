@@ -1,14 +1,22 @@
-// src/components/Login.jsx
 import { useState } from 'react';
-import { Link } from 'react-router-dom'; // For the link to the Signup page
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // Initialize the navigate function
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Handle login logic here
+    // Perform your login logic here, and if successful, navigate to the dashboard.
+
+    // Example: Check if email and password are correct (replace this with your actual login logic).
+    const isLoginSuccessful = true; // Replace with your actual login logic result
+
+    if (isLoginSuccessful) {
+      // Navigate to the dashboard page after successful login.
+      navigate('/dashboard');
+    }
   };
 
   return (

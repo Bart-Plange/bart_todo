@@ -1,4 +1,3 @@
-// src/App.js
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
 import Signup from './components/Signup';
@@ -9,8 +8,8 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<Login />} index={true} /> {/* Set index to true for the /login route. */}
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );
